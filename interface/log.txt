@@ -1,0 +1,8 @@
+Error: an error occoured!.
+Error: an error occoured!.
+Error: an error occoured!.
+Error: Log this to the file logger.
+Error: an error occoured!.
+Error: Log this to the file logger.
+Error: an error occoured!.
+Error: Log this to the file logger.
