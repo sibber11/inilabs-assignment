@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\DeleteManyTodoRequest;
 use App\Models\Todo;
+use Inertia\Inertia;
 use App\Http\Requests\StoreTodoRequest;
 use App\Http\Requests\UpdateTodoRequest;
-use Inertia\Inertia;
+use App\Http\Requests\DeleteManyTodoRequest;
+use App\Http\Requests\CompleteManyTodoRequest;
 
 class TodoController extends Controller
 {
@@ -81,5 +82,30 @@ class TodoController extends Controller
 
         // return back with a success message
         return back()->with('success', 'Todos deleted successfully.');
+    }
+
+    /**
+     * Remove the specified resources from storage.
+     */
+    public function completeMany(CompleteManyTodoRequest $request)
+    {
+        // Update the status of the todos
+        Todo::whereIn('id', $request->validated('todos'))->update([
+            'status' => $request->validated('status')
+        ]);
+
+        // return back with a success message
+        return back()->with('success', 'Todos updated successfully.');
+    }
+    /**
+     * Remove the specified resources from storage.
+     */
+    public function destroyCompleted()
+    {
+        // Update the status of the todos
+        Todo::whereStatus('completed')->delete();
+
+        // return back with a success message
+        return back()->with('success', 'Todos updated successfully.');
     }
 }
